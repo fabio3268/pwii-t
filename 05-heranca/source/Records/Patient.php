@@ -6,14 +6,14 @@ use Source\General\User;
 
 class Patient extends User
 {
-    protected $chart;
-    protected $dtBorn;
+    private $chart;
+    private $dtBirth;
 
-    public function __construct($name, $email, $chart, $dtBorn)
+    public function __construct($name, $email, $chart, $dtBirth)
     {
         parent::__construct($name, $email);
         $this->chart = $chart;
-        $this->dtBorn = $dtBorn;
+        $this->dtBirth = $dtBirth;
     }
 
 }

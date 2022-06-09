@@ -2,24 +2,22 @@
 
 require __DIR__ . "/source/autoload.php";
 
-$user = new \Source\General\User(
-    "Fábio",
-    "fabio@gmail.com"
-);
+$user = new \Source\General\User("Fábio","fabiosantos@ifsul.edu.br");
 
-$doctor = new \Source\Hospital\Doctor(
-    "Dréuzio Varela",
-    "drauzio@gmail",
-    "35345",
-    "Oncologista"
-);
+var_dump($user);
 
-$patient = new \Source\Records\Patient(
-    "José",
-    "jose@gmail.com",
-    "Dados do Prontuário",
-    "12/12/1980"
-);
+$userDoctor = new \Source\Hospital\Doctor(
+    "Dráuzio Varela",
+    "druziovarela@gmail.com",
+    "12435676",
+    "Oncologista");
 
-var_dump($user,$doctor, $patient);
+var_dump($userDoctor);
 
+$userPatient = new \Source\Records\Patient(
+    "Fábio Santos",
+    "fabiosantos@ifsul.edu.br",
+    "Prontuário",
+    "12/02/1976");
+
+var_dump($userPatient);

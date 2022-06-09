@@ -6,7 +6,6 @@ class User
 {
     private $name;
     private $email;
-
     /**
      * @param $name
      * @param $email
@@ -17,36 +16,24 @@ class User
         $this->email = $email;
     }
 
-    /**
-     * @return mixed
-     */
+    /** @return mixed */
     public function getName()
     {
         return $this->name;
     }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
+    /** @param mixed $name */
+    public function setName($name)
     {
         $this->name = $name;
     }
-
-    /**
-     * @return mixed
-     */
+    /** @return mixed */
     public function getEmail()
     {
         return $this->email;
     }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
+    /** @param mixed $email */
+    public function setEmail($email)
     {
         $this->email = $email;
     }
-
 }
