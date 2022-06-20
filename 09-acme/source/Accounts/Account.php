@@ -8,7 +8,7 @@ class Account
     protected $balance;
 
     /**
-     * @param $namber
+     * @param $number
      * @param $balance
      */
     public function __construct($number, $balance)
@@ -20,17 +20,17 @@ class Account
     /**
      * @return mixed
      */
-    public function getNamber()
+    public function getNumber()
     {
-        return $this->namber;
+        return $this->number;
     }
 
     /**
-     * @param mixed $namber
+     * @param mixed $number
      */
-    public function setNamber($namber): void
+    public function setNamber($number): void
     {
-        $this->namber = $namber;
+        $this->number = $number;
     }
 
     /**
@@ -48,9 +48,5 @@ class Account
     {
         $this->balance = $balance;
     }
-
-
-
-
 
 }

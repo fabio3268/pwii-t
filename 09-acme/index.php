@@ -41,8 +41,43 @@ $checking02 = new \Source\Accounts\Checking(
     "10"
 );
 
+$product01 = new \Source\Products\Product(
+    "Cartão de Crédito",
+    "19"
+);
+
+$product02 = new \Source\Products\Product(
+    "Empréstimo",
+    "3"
+);
+
 $client->addSaving($saving01);
 $client->addSaving($saving02);
 $client->addChecking($checking01);
 $client->addChecking($checking02);
-var_dump($client);
+$client->addProduct($product01);
+$client->addProduct($product02);
+//var_dump($client);
+
+echo "<p>Nome: {$client->getName()}</p>";
+echo "<p>Endereço: {$client->getAddress()->getStreet()}, 
+                   {$client->getAddress()->getNumber()}</p>";
+echo "<p>Endereço: {$client->getAddress()->show()}</p>";
+
+if($client->getSaving()){
+    $arraySanving = $client->getSaving();
+    /** @var \Source\Accounts\Savings $saving */
+    foreach ($arraySanving as $saving){
+        //echo "<p>Nro Conta Poupança: " . $saving->getNumber() . "</p>";
+        //echo "<p>Saldo: " . $saving->getBalance() . "</p>";
+        echo $saving->show();
+    }
+}
+
+
+
+
+
+
+
+

@@ -4,6 +4,7 @@ namespace Source\Clients;
 
 use Source\Accounts\Checking;
 use Source\Accounts\Savings;
+use Source\Products\Product;
 
 class Client
 {
@@ -14,6 +15,7 @@ class Client
     private $address;
     private $saving;
     private $checking;
+    private $product;
 
     /**
      * @param $name
@@ -99,11 +101,26 @@ class Client
         $this->address = $address;
     }
 
+    public function getAddress() : Address
+    {
+        return $this->address;
+    }
+
     public function addSaving(Savings $saving){
         $this->saving[] = $saving;
     }
 
+    public function getSaving()
+    {
+        return $this->saving;
+    }
+
     public function addChecking(Checking $checking){
         $this->checking[] = $checking;
+    }
+
+    public function addProduct(Product $product)
+    {
+        $this->product[] = $product;
     }
 }
