@@ -13,7 +13,7 @@ echo "---------------";
 
 try {
     $pdo = new PDO(
-        "mysql:host=localhost;dbname=bd-pwii",
+        "mysql:host=localhost;dbname=bd-inf-3at",
         "root",
         "",
         [
