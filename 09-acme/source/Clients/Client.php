@@ -4,6 +4,7 @@ namespace Source\Clients;
 
 use Source\Accounts\Checking;
 use Source\Accounts\Savings;
+use Source\Database\Connect;
 use Source\Products\Product;
 
 class Client
@@ -23,7 +24,13 @@ class Client
      * @param $password
      * @param $dtBorn
      */
-    public function __construct($name, $email, $password, $dtBorn,Address $address)
+    public function __construct(
+        $name = NULL,
+        $email= NULL,
+        $password = NULL,
+        $dtBorn = NULL,
+        Address $address = NULL
+    )
     {
         $this->name = $name;
         $this->email = $email;
@@ -123,4 +130,32 @@ class Client
     {
         $this->product[] = $product;
     }
+
+    public function insert ()
+    {
+        $query = "INSERT INTO clients VALUES (NULL,:nome,:email,:password,:dtBorn,NULL, NULL)";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":nome",$this->name);
+        $stmt->bindParam(":email",$this->email);
+        $stmt->bindParam(":password",$this->password);
+        $stmt->bindParam(":dtBorn",$this->dtBorn);
+        $stmt->execute();
+    }
+
+    public function findById(int $id)
+    {
+        $query = "SELECT * FROM clients WHERE id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        $client = $stmt->fetch();
+        //$this->id = $client->id;
+        if($stmt->rowCount() != 0) {
+            $this->name = $client->name;
+            $this->email = $client->email;
+            $this->password = $client->pasword;
+            $this->dtBorn = $client->dtBorn;
+        }
+    }
+
 }
