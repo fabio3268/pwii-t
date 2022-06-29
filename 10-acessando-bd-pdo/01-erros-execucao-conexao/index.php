@@ -1,9 +1,10 @@
 <?php
 
 try {
-
+    // código monitorado pelo try
 } catch (PDOException $exception){
-    var_dump($exception);
+    //var_dump($exception);
+    echo "Erro ao conectar!";
 }
 finally {
     echo "<p>Execução Terminou!</p>";
@@ -21,13 +22,24 @@ try {
         ]
     );
 
-    $stmt = $pdo->query("SELECT * FROM users LIMIT 3");
+    $stmt = $pdo->query("SELECT * FROM users");
+    /*
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    var_dump($user);
+    echo "<p>Nome: {$user["name"]}</p>";
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    var_dump($user);
+    echo "<p>Nome: {$user["name"]}</p>";
+    */
 
     while ($user = $stmt->fetch(PDO::FETCH_ASSOC)){ // mode do fetch PDO::FETCH_ASSOC
         var_dump($user);
+        echo "<p>Nome: {$user['name']}</p>";
     }
 
 } catch (PDOException $exception) {
+    //echo "<p>Erro ao conectar!</p>";
     var_dump($exception);
-    echo "<p>{$exception->getMessage()}</p>";
+    //echo "<p>{$exception->getMessage()}</p>";
+    //header("Location:https://www.google.com/");
 }

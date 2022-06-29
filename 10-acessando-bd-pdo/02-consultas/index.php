@@ -7,20 +7,19 @@ use Source\Database\Connect;
 
 echo "<h2>INSERT com Query</h2>";
 
-$insert = "INSERT INTO users (name, email, password) VALUES ('Fábio Luís da Silva Santos','fabiosantos@ifsul.edu.br','23465')";
+$insert = "INSERT INTO users (name, email, password) VALUES
+        ('André Luís da Silva Santos','fabiosantos@ifsul.edu.br','23465')";
 
-try{
-    $query = Connect::getInstance()->query($insert);
+    $query = Connect::getInstance();
+
+    $query->query($insert);
     var_dump(
         $query,
         Connect::getInstance()->lastInsertId(),
-        $query->errorInfo()
+        $query->lastInsertId()
     );
-}catch (PDOException $exception) {
-    var_dump($exception);
-}
 
-
+/*
 echo "<h2>SELECT com Query</h2>";
 
 $select = "SELECT * FROM users LIMIT 4";
@@ -35,7 +34,7 @@ try {
 } catch (PDOException $exception){
     var_dump($exception);
 }
-
+/*
 echo "<h2>UPDATE com Exec</h2>";
 
 $update = "UPDATE users SET name = 'Carlos Eduardo Cunnha' WHERE id = 5";
@@ -58,3 +57,4 @@ try {
     var_dump($exception);
 }
 
+*/
