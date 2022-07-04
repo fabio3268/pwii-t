@@ -49,7 +49,7 @@ CREATE TABLE `addresses` (
                              `complement` varchar(255) NOT NULL,
                              `client_id` int(11) NOT NULL,
                              `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-                             `update_at` varchar(45) DEFAULT 'ON UPDATE CURRENT_TIMESTAP()',
+                             `update_at` varchar(45) DEFAULT 'ON UPDATE current_timestamp()',
                              PRIMARY KEY (`id`),
                              KEY `fk_addresses_clients_idx` (`client_id`),
                              CONSTRAINT `fk_addresses_clients` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
