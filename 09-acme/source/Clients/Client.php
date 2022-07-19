@@ -171,19 +171,18 @@ class Client
          * Substituição de cada um dos parâmetros por seus repectivos valores
          */
 
-        var_dump($stmt);
-
         $stmt->bindParam(":name",$this->name);
         $stmt->bindParam(":email",$this->email);
         $stmt->bindParam(":password",$this->password);
         $stmt->bindParam(":dtBorn",$this->dtBorn);
 
         $stmt->execute(); // Por fim, a query é executada
+        var_dump($stmt);
         /**
          * mesmo utilizando a $stmt para incluir o registro, quem tem o valor do último registro
          * incluído é a Connect
          */
-        var_dump(Connect::getInstance()->lastInsertId());
+        //var_dump(Connect::getInstance()->lastInsertId());
 
     }
 
@@ -199,11 +198,25 @@ class Client
         $client = $stmt->fetch();
         if($stmt->rowCount() == 1) {
             // Encontrado o registro, os atributos são preenchidos
-            var_dump($client);
+            //var_dump($client);
             $this->name = $client->name;
             $this->email = $client->email;
             $this->password = $client->password;
             $this->dtBorn = $client->dtBorn;
         }
+    }
+
+    public function validate(string $email, string $password)
+    {
+        $query = "SELECT * FROM clients WHERE email LIKE :email AND password LIKE :password";
+        $stmt = Connect::getInstance()->prepare($query);
+
+        $stmt->bindParam(":email",$email);
+        $stmt->bindParam(":password",$password);
+
+        $stmt->execute(); // Por fim, a query é executada
+
+        var_dump($stmt->rowCount());
+
     }
 }
