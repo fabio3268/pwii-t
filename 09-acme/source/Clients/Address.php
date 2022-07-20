@@ -76,8 +76,14 @@ class Address
         return "{$this->street}, {$this->getNumber()}";
     }
 
-    public function insert(int $idClient)
+    public function insert(int $idClient = NULL)
     {
+        // aqui podemos utilizar o mesmo método para a situação em que já temos o idClient
+        // o mesmo vem pela construtora
+        if(empty($idClient)){
+            $idClient = $this->idClient;
+        }
+
         // INSERT INTO addresses VALUES (NULL, 'Rua A', '2345','casa', 8, NULL, NULL);
         $query = "INSERT INTO addresses VALUES (NULL, :street, :number,:complement, :idClient, NULL, NULL)";
         $stmt = Connect::getInstance()->prepare($query);
