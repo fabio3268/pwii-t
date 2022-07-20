@@ -13,9 +13,9 @@ $address = new \Source\Clients\Address(
 var_dump($address);
 // instancia um objeto Cliente
 $client = new \Source\Clients\Client(
-    "Dante",
-    "dante@ifsul.edu.br",
-    "234567",
+    "Antônio",
+    "antonio@ifsul.edu.br",
+    "12345678",
     "1980-02-12",
     $address,
 );

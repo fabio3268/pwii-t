@@ -152,16 +152,14 @@ class Client
         $this->product[] = $product;
     }
 
-    /**
-     *
-     */
     public function insert(): void // por enquanto retorna nada
     {
         /**
          * define a query com parâmetros :name, :email, :password :dtBorn, cada um deles vai ser substituido
          * com a utilização do método ->bindParm
+         * INSERT INTO clients VALUES (NULL, 'José', 'jose@gmail.com','234567','1976-10-10',NULL, NULL);
          */
-        $query = "INSERT INTO clients VALUES (NULL, :name, :email,:password,:dtBorn,NULL, NULL)";
+        $query = "INSERT INTO clients VALUES (NULL,:name,:email,:password,:dtBorn,NULL, NULL)";
         /**
          * utilizar o método ->prepare, para criar um objeto PDOStatement, que prepara a query antes
          * de ser utilizada
@@ -170,20 +168,21 @@ class Client
         /**
          * Substituição de cada um dos parâmetros por seus repectivos valores
          */
-
         $stmt->bindParam(":name",$this->name);
         $stmt->bindParam(":email",$this->email);
         $stmt->bindParam(":password",$this->password);
         $stmt->bindParam(":dtBorn",$this->dtBorn);
 
         $stmt->execute(); // Por fim, a query é executada
-        var_dump($stmt);
+
+        $this->address->insert(Connect::getInstance()->lastInsertId());
+
+        //var_dump($stmt);
         /**
          * mesmo utilizando a $stmt para incluir o registro, quem tem o valor do último registro
          * incluído é a Connect
          */
         //var_dump(Connect::getInstance()->lastInsertId());
-
     }
 
     /**
@@ -191,11 +190,14 @@ class Client
      */
     public function findById(int $id): void // por enquanto retorna nada
     {
+        // SELECT * FROM clients WHERE id = 8
+
         $query = "SELECT * FROM clients WHERE id = :id"; // da mesma forma se cria a query utilizando parêmetros
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":id", $id ); // substitui o parâmetro pelo respectivo valor, no caso o $id
         $stmt->execute(); // Executa
         $client = $stmt->fetch();
+        //var_dump($client);
         if($stmt->rowCount() == 1) {
             // Encontrado o registro, os atributos são preenchidos
             //var_dump($client);
@@ -206,17 +208,41 @@ class Client
         }
     }
 
-    public function validate(string $email, string $password)
+    public function findByName(string $name)
     {
+        // SELECT * FROM clients WHERE name LIKE 'Fábio';
+        $query = "SELECT * FROM clients WHERE name LIKE :name";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":name",$name);
+        $stmt->execute();
+        $client = $stmt->fetch();
+        if($stmt->rowCount() == 1) {
+            $this->name = $name;
+            $this->email = $client->email;
+            $this->password = $client->password;
+            $this->dtBorn = $client->dtBorn;
+        }
+    }
+
+    public function validate(string $email, string $password) : bool
+    {
+        // SELECT * FROM clients WHERE email LIKE 'antonio@ifsul.edu.br' AND password LIKE '12345678'
         $query = "SELECT * FROM clients WHERE email LIKE :email AND password LIKE :password";
         $stmt = Connect::getInstance()->prepare($query);
 
         $stmt->bindParam(":email",$email);
         $stmt->bindParam(":password",$password);
 
-        $stmt->execute(); // Por fim, a query é executada
-
-        var_dump($stmt->rowCount());
-
+        $stmt->execute();
+        $client = $stmt->fetch();
+        if($stmt->rowCount() == 1) {
+            $this->name = $client->name;
+            $this->email = $client->email;
+            $this->password = $client->password;
+            $this->dtBorn = $client->dtBorn;
+            return true;
+        } else {
+            return false;
+        }
     }
 }

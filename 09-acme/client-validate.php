@@ -5,5 +5,10 @@ require __DIR__ . "/source/Boot/config.php";
 
 $client = new \Source\Clients\Client();
 var_dump($client);
-$client->validate("dante@ifsul.edu.br","12345678");
+if($client->validate("dante@ifsul.edu.br","12345678")){
+    echo "Login OK";
+} else {
+    echo "Login não OK!";
+}
+var_dump($client);
 

@@ -2,6 +2,7 @@
 
 namespace Source\Clients;
 
+use Source\Database\Connect;
 /**
  *
  */
@@ -15,6 +16,8 @@ class Address
      * @var string|null
      */
     private string $number;
+    private string $complement;
+    private int $idClient;
 
     /**
      * @param string|null $street
@@ -22,11 +25,15 @@ class Address
      */
     public function __construct(
         string $street = NULL, 
-        string $number = NULL
+        string $number = NULL,
+        string $complement = NULL,
+        int $idClient = NULL
     )
     {
         $this->street = $street;
         $this->number = $number;
+        $this->complement = $complement;
+        $this->idClient = $idClient;
     }
 
     /**
@@ -69,9 +76,16 @@ class Address
         return "{$this->street}, {$this->getNumber()}";
     }
 
-    public function insert()
+    public function insert(int $idClient)
     {
-        
+        // INSERT INTO addresses VALUES (NULL, 'Rua A', '2345','casa', 8, NULL, NULL);
+        $query = "INSERT INTO addresses VALUES (NULL, :street, :number,:complement, :idClient, NULL, NULL)";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":street",$this->street);
+        $stmt->bindParam(":number",$this->number);
+        $stmt->bindParam(":complement",$this->complement);
+        $stmt->bindParam(":idClient",$idClient);
+        $stmt->execute();
     }
 
     public function findByIdClient()
