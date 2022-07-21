@@ -4,19 +4,24 @@ require __DIR__ . "/source/autoload.php";
 require __DIR__ . "/source/Boot/config.php";
 
 $address = new \Source\Clients\Address(
-    "Santa Bárbara",
+    "General Rondon",
     "1200",
-    "Não Tem"
+    "ap 400",
+    7
 );
 
-$client = new \Source\Clients\Client(
-    "João Antônio da Silva",
-    "joaoantonio@ifsul.edu.br",
-    "87654321",
-    "1976-02-12",
-    $address,
-);
+$address->insert();
 
-$client->insert();
+var_dump($address);
 
-var_dump($client);
+//$client = new \Source\Clients\Client(
+//    "Alberto",
+//    "alberto@gmail.com",
+//    "1234567",
+//    "1980-10-10",
+//    $address
+//);
+//
+//var_dump($client);
+
+//$client->insert();

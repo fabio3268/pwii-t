@@ -19,14 +19,6 @@ class Client
     private $checking;
     private $product;
 
-    /**
-     * @param string|null $name
-     * @param string|null $email
-     * @param string|null $password
-     * @param string|null $dtBorn
-     * @param Address|null $address
-     * O ? no início de cada var, indica que o valor da mesma pode ser NULL
-     */
     public function __construct(
         ?string $name = NULL,
         ?string $email= NULL,

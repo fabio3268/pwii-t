@@ -7,7 +7,8 @@ require __DIR__ . "/source/Boot/config.php";
 // Cria um endereço qualquer
 $address = new \Source\Clients\Address(
     "Rua Z",
-    "324"
+    "324",
+    "casa"
 );
 
 var_dump($address);

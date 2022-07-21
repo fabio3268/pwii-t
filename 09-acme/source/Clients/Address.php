@@ -8,26 +8,16 @@ use Source\Database\Connect;
  */
 class Address
 {
-    /**
-     * @var string|null
-     */
-    private string $street;
-    /**
-     * @var string|null
-     */
-    private string $number;
-    private string $complement;
-    private int $idClient;
+    private $street;
+    private $number;
+    private $complement;
+    private $idClient;
 
-    /**
-     * @param string|null $street
-     * @param string|null $number
-     */
     public function __construct(
-        string $street = NULL, 
-        string $number = NULL,
-        string $complement = NULL,
-        int $idClient = NULL
+        ?string $street = NULL,
+        ?string $number = NULL,
+        ?string $complement = NULL,
+        ?string $idClient = NULL
     )
     {
         $this->street = $street;
@@ -83,7 +73,6 @@ class Address
         if(empty($idClient)){
             $idClient = $this->idClient;
         }
-
         // INSERT INTO addresses VALUES (NULL, 'Rua A', '2345','casa', 8, NULL, NULL);
         $query = "INSERT INTO addresses VALUES (NULL, :street, :number,:complement, :idClient, NULL, NULL)";
         $stmt = Connect::getInstance()->prepare($query);
@@ -94,9 +83,21 @@ class Address
         $stmt->execute();
     }
 
-    public function findByIdClient()
+    public function findByIdClient(int $idClient)
     {
-        
+        //SELECT * FROM addresses WHERE client_id = 9
+        $query = "SELECT * FROM addresses WHERE client_id = :idClient";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":idClient",$idClient);
+        $stmt->execute();
+        if($stmt->rowCount() == 0){
+            echo "Esse cliente não tem endereço!";
+        } else {
+            while($address = $stmt->fetch()) {
+                var_dump($address);
+            }
+//            $address = $stmt->fetchAll();
+//            var_dump($address);
+        }
     }
-
 }
