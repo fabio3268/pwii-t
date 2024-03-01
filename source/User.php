@@ -6,13 +6,18 @@ class User
     private $email;
     private $password;
 
-    public function __construct (string $name = null, string $email = null)
+    public function __construct (
+        string $name = null,
+        string $email = null,
+        string $password = null
+    )
     {
         $this->name = $name;
         $this->email = $email;
+        $this->password = $password;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -22,7 +27,7 @@ class User
         $this->name = $name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -31,6 +36,16 @@ class User
     {
         $this->email = $email;
     }
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+
 
 }
 
