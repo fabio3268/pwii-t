@@ -1,8 +1,5 @@
 <?php
 
-//require __DIR__ . "/source/Models/Faq/Question.php";
-//require __DIR__ . "/source/Models/Faq/Type.php";
-
 require __DIR__ . "/source/autoload.php";
 
 use Source\Models\Faq\Question;
