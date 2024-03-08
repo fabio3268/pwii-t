@@ -1,5 +1,7 @@
 <?php
 
+use Source\Models\User;
+
 require __DIR__ . "/User.php";
 
 class Author extends User
