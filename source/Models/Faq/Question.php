@@ -9,12 +9,6 @@ class Question {
     private $question;
     private $answer;
 
-    /**
-     * @param $id
-     * @param $idType
-     * @param $question
-     * @param $answer
-     */
     public function __construct(
         int $id,
         int $idType,
