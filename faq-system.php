@@ -11,21 +11,31 @@ echo "<h1>Olá, Sistema de FAQ</h1>";
 
 
 
+$questioInsert = new Question(
+    NULL,
+    2,
+    "Segunda Questão",
+    "Segunda Resposta"
+);
 
+var_dump($questioInsert);
 
+$questioInsert->insert();
+
+/*
 $question = new Question();
 $type = new Type();
 $listQuestions = $question->selectAll();
 var_dump(json_encode($listQuestions));
 
-//var_dump($question);
-//var_dump($type);
+var_dump($question);
+var_dump($type);
 
 $conn = Connect::getInstance();
-//var_dump($conn);
+var_dump($conn);
 $query = "SELECT * FROM questions";
 $result = $conn->query($query)->fetchAll();
-//var_dump($result);
+var_dump($result);
 
-
+*/
 

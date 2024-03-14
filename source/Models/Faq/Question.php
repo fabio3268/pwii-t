@@ -10,10 +10,10 @@ class Question {
     private $answer;
 
     public function __construct(
-        int $id,
-        int $idType,
-        string $question,
-        string $answer
+        int $id = null,
+        int $idType = null,
+        string $question = null,
+        string $answer = null
     )
     {
         $this->id = $id;
@@ -62,11 +62,20 @@ class Question {
         $this->answer = $answer;
     }
 
+    public function insert ()
+    {
+        $query = "INSERT INTO questions VALUES 
+                  (NULL, {$this->idType}, '{$this->question}', '{$this->answer}')";
+        Connect::getInstance()->query($query);
+    }
+
     public function selectAll (): ?array
     {
         $conn = Connect::getInstance();
         $query = "SELECT * FROM questions";
         return $conn->query($query)->fetchAll();
     }
+
+
 
 }
