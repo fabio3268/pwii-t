@@ -2,9 +2,9 @@
 
 namespace Source\Models\Faq;
 use Source\Core\Connect;
-use Source\Core\Model;
+use Source\Core\Models;
 
-class Type extends Model {
+class Type extends Models {
     private $id;
     private $description;
 
@@ -37,5 +37,12 @@ class Type extends Model {
     {
         $this->description = $description;
     }
+
+/*    public function selectAll (): ?array
+    {
+        $conn = Connect::getInstance();
+        $query = "SELECT * FROM types";
+        return $conn->query($query)->fetchAll();
+    }*/
 
 }

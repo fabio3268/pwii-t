@@ -9,7 +9,7 @@ use Source\Models\Faq\Type;
 
 echo "<h1>Olá, Sistema de FAQ</h1>";
 
-
+/*
 
 $questioInsert = new Question(
     NULL,
@@ -21,21 +21,29 @@ $questioInsert = new Question(
 var_dump($questioInsert);
 
 $questioInsert->insert();
+*/
+
+
+$question = new Question();
+var_dump($question->selectById(13));
+
+
+$type = new Type();
+//var_dump($type->selectAll());
+var_dump($type->selectById(2));
+
+//$listQuestions = $question->selectAll();
+//var_dump(json_encode($listQuestions));
+
+//var_dump($question);
+//var_dump($type);
 
 /*
-$question = new Question();
-$type = new Type();
-$listQuestions = $question->selectAll();
-var_dump(json_encode($listQuestions));
-
-var_dump($question);
-var_dump($type);
-
 $conn = Connect::getInstance();
 var_dump($conn);
 $query = "SELECT * FROM questions";
 $result = $conn->query($query)->fetchAll();
 var_dump($result);
-
 */
+
 
