@@ -1,7 +1,10 @@
 <?php
 
 namespace Source\Models;
-class User
+use Source\Core\Models;
+use Source\Core\Connect;
+
+class User extends Models
 {
     private $id;
     private $name;
@@ -19,6 +22,7 @@ class User
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
+        $this->entity = "users";
     }
 
     public function getId(): ?int
@@ -30,8 +34,6 @@ class User
     {
         $this->id = $id;
     }
-
-
 
     public function getName(): ?string
     {
@@ -63,6 +65,19 @@ class User
         $this->password = $password;
     }
 
+    public function login (string $email)
+    {
+        $query = "SELECT * 
+                  FROM users
+                  WHERE email LIKE :email";
+        $conn = Connect::getInstance();
+
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam("email",$email);
+        $result = $stmt->execute();
+        var_dump($stmt->rowCount());
+
+    }
 
 }
 

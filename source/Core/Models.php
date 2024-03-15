@@ -23,4 +23,9 @@ abstract class Models
         return $conn->query($query)->fetchAll();
     }
 
+    public function insert ()
+    {
+
+    }
+
 }
