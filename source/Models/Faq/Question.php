@@ -76,6 +76,4 @@ class Question {
         return $conn->query($query)->fetchAll();
     }
 
-
-
 }
